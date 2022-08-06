@@ -13,12 +13,18 @@ export const OneRequest = () => {
         Back Home page
       </NavLink>
 
+      {isLoading && (
+
+        <h2>Loading...</h2>
+
+      )}
+
       {data ? (
         <>
           {isError&& (
             <h2>{error.message}</h2>
           )}
-          <img src={data.data[0].url} alt="cat-picture" />
+          <img src={data.data[0].url} alt='' />
           <h2>you can keep clicking if you want meet an other cat</h2>
         </>
       ) : (
