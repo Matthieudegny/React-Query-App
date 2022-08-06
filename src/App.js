@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { QueryClientProvider, QueryClient } from 'react-query'
+import { HomePage } from './components/Homepage/HomePage';
+import { Routes, Route, NavLink } from 'react-router-dom'
+
+import { OneRequest } from './components/fetchOneRequest/FetchOneRequest'
+
+
+const queryClient = new QueryClient()
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <QueryClientProvider client={queryClient}>
+      <Routes>
+          <Route path="/" element={<HomePage/>}/>
+          <Route path="/oneRequest" element={<OneRequest/>}/>
+      </Routes>
+    </QueryClientProvider>
+ 
   );
 }
 
