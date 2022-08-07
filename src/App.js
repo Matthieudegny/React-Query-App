@@ -5,6 +5,7 @@ import { HomePage } from './components/Homepage/HomePage';
 import { Routes, Route } from 'react-router-dom'
 
 import { OneRequest } from './components/fetchOneRequest/FetchOneRequest'
+import { DynamicRequest } from './components/dynamicRequest/DynamicRequest';
 
 const queryClient = new QueryClient()
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/oneRequest" element={<OneRequest/>}/>
+          <Route path="/dynamicRequest" element={<DynamicRequest/>}/>
       </Routes>
       <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
     </QueryClientProvider>
