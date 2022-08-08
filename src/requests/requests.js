@@ -6,8 +6,6 @@ const fetchCat = async() => {
 }
 
 const fetchSeveralCats = async(numberCats) => {
-    console.log(`https://api.thecatapi.com/v1/images/search?limit=${numberCats}`)
-    console.log(numberCats, typeof(numberCats))
     return await axios.get(`https://api.thecatapi.com/v1/images/search?limit=${numberCats}`)
 }
 
@@ -32,10 +30,11 @@ export const useCatDataMount = (onSuccess, onError) => {
 
 //request on the mount of the component
 export const useCatDynamic = (numberCats) => {
-    return useMutation(['several-cats',numberCats],() => fetchSeveralCats(numberCats), {
-        enabled: false,
+    return useQuery(['several-cats',numberCats],() => fetchSeveralCats(numberCats), {
+        enabled: !!numberCats,
+        keepPreviousData: true,
         keepPreviousData: false,
-        refetchOnMount: true,
+        refetchOnMount: false,
         refetchOnWindowFocus: false,
     })
 }

@@ -1,30 +1,35 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useCatDynamic } from '../../requests/requests'
+import { NavLink } from 'react-router-dom'
+
+import './dynamicRequest.css'
 
 export const DynamicRequest = () => {
 
     const catNumberRef = useRef()
 
-    const [numberCats, setNumberCats] = useState()
+    const [numberCats, setNumberCats] = useState('')
 
     const submit = (event) => {
         event.preventDefault();
         const numberOfCats = catNumberRef.current.value
         setNumberCats(numberOfCats)
-        console.log(numberCats)
-        cats(numberCats)
+        //function catDynamic is from react query useCatDynamic function with refetch:catDynamic
+        catDynamic()
     }
 
-    const { mutate: cats, data } = useCatDynamic(numberCats)
-    //const { mutate : cats , data } = useCatDynamic(numbercats)
+    const {isLoading, data, refetch:catDynamic } = useCatDynamic(numberCats)
 
-  
-    if (data) console.log(data)
-
-    //const arrayCats = data.data
+    if(isLoading){
+        return <p>Loading</p>
+    }
 
     return (
-    <div className='container-dynamicRequest'>
+    <div className='container-dynamicRequest'>       
+
+        <NavLink to="/">
+            Back Home page
+        </NavLink>
 
         <form action="" onSubmit={(e) => submit(e)}>
 
@@ -33,13 +38,21 @@ export const DynamicRequest = () => {
 
             <button type='submit'>Ready to adopt</button>
 
+        </form>
+
+        <div className='container-dynamicRequest-carContainer'>
+
+
             {data?.data.map((cat) => {
                 return (
-                    <img key={cat.id} src={cat.url} alt="" />
+
+                        <img key={cat.id} src={cat.url} alt="" />
+                         
                 )
             })}
 
-        </form>
+        </div>
+
     </div>
   )
 }
