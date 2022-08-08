@@ -9,6 +9,7 @@ export const DynamicRequest = () => {
     const catNumberRef = useRef()
 
     const [numberCats, setNumberCats] = useState('')
+    const [arrayCats, setArrayCats] = useState('')
 
     const submit = (event) => {
         event.preventDefault();
@@ -18,11 +19,13 @@ export const DynamicRequest = () => {
         catDynamic()
     }
 
-    const {isLoading, data, refetch:catDynamic } = useCatDynamic(numberCats)
+    const onSuccess = (catObject) => {
+        setArrayCats(catObject.data)
+      }
 
-    if(isLoading){
-        return <p>Loading</p>
-    }
+    const {isLoading, data : catObject, refetch:catDynamic } = useCatDynamic(numberCats, onSuccess)
+
+
 
     return (
     <div className='container-dynamicRequest'>       
@@ -40,18 +43,32 @@ export const DynamicRequest = () => {
 
         </form>
 
-        <div className='container-dynamicRequest-carContainer'>
+        
+         {isLoading && (
 
+            <h2>Loading...</h2>
 
-            {data?.data.map((cat) => {
-                return (
+        )}
 
-                        <img key={cat.id} src={cat.url} alt="" />
-                         
-                )
+        {arrayCats ? (
+
+           <div className='container-dynamicRequest-carContainer'>
+
+            {arrayCats.map((cat) => {
+                return(
+                    <img key={cat.id} src={cat.url} alt="" />
+                    )
             })}
+            
+           </div>
 
-        </div>
+        ) : (
+
+            <h2>Please selct how many cats do you want</h2>
+
+        ) }
+
+    
 
     </div>
   )

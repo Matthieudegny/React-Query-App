@@ -29,12 +29,13 @@ export const useCatDataMount = (onSuccess, onError) => {
 }
 
 //request on the mount of the component
-export const useCatDynamic = (numberCats) => {
+export const useCatDynamic = (numberCats, onSuccess) => {
     return useQuery(['several-cats',numberCats],() => fetchSeveralCats(numberCats), {
         enabled: !!numberCats,
         keepPreviousData: true,
         keepPreviousData: false,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
+        onSuccess,
     })
 }

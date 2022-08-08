@@ -10,6 +10,7 @@
 -request on click\
 -success and error callback\
 -custom quey hook\
+-query with dynamic parameter\
 
 ## aditonals goals:
 
