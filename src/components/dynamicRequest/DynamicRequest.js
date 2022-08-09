@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { useCatDynamic } from '../../requests/requests'
 import { NavLink } from 'react-router-dom'
 
@@ -23,9 +23,7 @@ export const DynamicRequest = () => {
         setArrayCats(catObject.data)
       }
 
-    const {isLoading, data : catObject, refetch:catDynamic } = useCatDynamic(numberCats, onSuccess)
-
-
+    const {isLoading, data, refetch:catDynamic } = useCatDynamic(numberCats, onSuccess)
 
     return (
     <div className='container-dynamicRequest'>       
@@ -38,7 +36,6 @@ export const DynamicRequest = () => {
 
             <label htmlFor="tentacles">Number of Cats (1-5):</label>
             <input type="number" name="catNumber" min="1" max="5" placeholder='0' ref={catNumberRef}/>
-
             <button type='submit'>Ready to adopt</button>
 
         </form>

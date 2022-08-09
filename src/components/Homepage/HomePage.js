@@ -54,6 +54,12 @@ export function HomePage () {
         <NavLink to="/dynamicRequest">
             dynamicRequest
         </NavLink>
+        <NavLink to="/infinitScroll">
+            InfinitScroll
+        </NavLink>
+        <NavLink to="/paginatedCats">
+            PaginatedCats
+        </NavLink>
         </div>
     )
 }
