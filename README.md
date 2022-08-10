@@ -11,10 +11,13 @@
 -success and error callback\
 -custom quey hook\
 -query with dynamic parameter\
+-paginated query\
+-infinated query
 
 ## aditonals goals:
 
--use localStorage
+-use localStorage\
+-useRef hook
 
 ## API used:
 
